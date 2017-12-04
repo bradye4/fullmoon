@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Run deployment
-          command: ./deploy.sh
+          command: deploy.sh
           # Environment variable for a single command shell
           environment:
             THEME_NAME: fullmoon
