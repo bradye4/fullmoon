@@ -22,7 +22,15 @@ jobs:
 
     steps:
       - checkout
+      - run:
+          name: current directory
+          shell: /bin/sh
+          command: |
+            echo debuggin
+            pwd
+            ls -l
       - deploy:
+          shell: /bin/sh
           command: |
             lftp sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOSTNAME} -e '
             mirror -v -R ./${THEME_NAME} ./wp-content/themes/${THEME_NAME}
