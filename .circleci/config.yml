@@ -16,11 +16,15 @@ jobs:
 
     working_directory: ~/repo
 
+    # Environment variable for a single command shell
+    environment:
+      THEME_NAME: fullmoon
+
     steps:
       - checkout
-      - run:
-          name: Run deployment
-          command: ./deploy.sh
-          # Environment variable for a single command shell
-          environment:
-            THEME_NAME: fullmoon
+      - deploy:
+          command: |
+            lftp sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOSTNAME} -e '
+            mirror -v -R ./${THEME_NAME} ./wp-content/themes/${THEME_NAME}
+            quit
+            '
