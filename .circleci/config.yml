@@ -18,4 +18,9 @@ jobs:
 
     steps:
       - checkout
-      - run: ./deploy.sh
+      - run:
+          name: Run deployment
+          command: ./deploy.sh
+          # Environment variable for a single command shell
+          environment:
+            THEME_NAME: fullmoon
