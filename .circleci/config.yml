@@ -23,12 +23,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: current directory
+          name: debugging the shit out of it
           shell: /bin/sh
           command: |
             echo debuggin
             pwd
             ls -l
+            lftp --version
       - deploy:
           shell: /bin/sh
           command: |
