@@ -34,7 +34,7 @@ jobs:
       - deploy:
           shell: /bin/sh
           command: |
-            lftp sftp://{{ .Environment.SFTP_USERNAME }}:{{ .Environment.SFTP_PASSWORD }}@{{ .Environment.SFTP_HOSTNAME }} -e '
+            lftp sftp://$SFTP_USERNAME:$SFTP_PASSWORD@$SFTP_HOSTNAME -e '
             mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
             quit
             '
