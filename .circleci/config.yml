@@ -7,6 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
+      # grabbed a docker image that had lftp from here -> https://github.com/AlpacaDB/docker-lftp
       - image: alpacadb/docker-lftp
 
       # Specify service dependencies here if necessary
@@ -34,6 +35,6 @@ jobs:
           shell: /bin/sh
           command: |
             lftp sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOSTNAME} -e '
-            mirror -v -R ./wp-content/themes/${THEME_NAME} ./wp-content/themes/${THEME_NAME}
+            mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/${THEME_NAME}
             quit
             '
