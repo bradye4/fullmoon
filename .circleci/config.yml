@@ -18,7 +18,7 @@ jobs:
 
     # Environment variable for a single command shell
     environment:
-      THEME_NAME: fullmoon
+      THEME_NAME: fullmoonrun
 
     steps:
       - checkout
@@ -34,6 +34,6 @@ jobs:
           shell: /bin/sh
           command: |
             lftp sftp://${SFTP_USERNAME}:${SFTP_PASSWORD}@${SFTP_HOSTNAME} -e '
-            mirror -v -R ./${THEME_NAME} ./wp-content/themes/${THEME_NAME}
+            mirror -v -R ./wp-content/themes/${THEME_NAME} ./wp-content/themes/${THEME_NAME}
             quit
             '
