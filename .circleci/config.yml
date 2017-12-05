@@ -15,6 +15,12 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mysql:9.4
 
+      # sample lftp cmd below
+      # lftp sftp://$SFTP_USERNAME:$SFTP_PASSWORD@$SFTP_HOSTNAME -e '
+      # mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
+      # quit
+      # '
+
     working_directory: ~/repo
 
     # Environment variable for a single command shell
@@ -34,12 +40,10 @@ jobs:
             echo attempt 1 $SFTP_USERNAME
             echo attempt 2 ${SFTP_USERNAME}
             echo attempt 3 {{ .Environment.SFTP_USERNAME }}
-            ftp $SFTP_USERNAME:$SFTP_PASSWORD@$SFTP_HOSTNAME
+            lftp sftp://$SFTP_USERNAME:$SFTP_PASSWORD@$SFTP_HOSTNAME
             ls -l
       - deploy:
           shell: /bin/sh
           command: |
-            lftp sftp://$SFTP_USERNAME:$SFTP_PASSWORD@$SFTP_HOSTNAME -e '
-            mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
-            quit
-            '
+            lftp -c "open -u $SFTP_USERNAME,$SFTP_PASSWORD $SFTP_HOSTNAME;
+            put -O fullmoon/wp-content/themes/fullmoonrun ./wp-content/themes/fullmoonrun"
