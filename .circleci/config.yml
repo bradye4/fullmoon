@@ -20,6 +20,9 @@ jobs:
       # mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
       # quit
       # '
+      # lftp -c "open -u $SFTP_USERNAME,$SFTP_PASSWORD $SFTP_HOSTNAME;
+      # put -O fullmoon/wp-content/themes/fullmoonrun ./wp-content/themes/fullmoonrun"
+      #
       # lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME
 
     working_directory: ~/repo
@@ -44,5 +47,7 @@ jobs:
       - deploy:
           shell: /bin/sh
           command: |
-            lftp -c "open -u $SFTP_USERNAME,$SFTP_PASSWORD $SFTP_HOSTNAME;
-            put -O fullmoon/wp-content/themes/fullmoonrun ./wp-content/themes/fullmoonrun"
+            lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME -e '
+            mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
+            quit
+            '
