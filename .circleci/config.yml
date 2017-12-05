@@ -31,6 +31,9 @@ jobs:
             pwd
             ls -l
             lftp --version
+            $SFTP_USERNAME
+            ${SFTP_USERNAME}
+            {{ .Environment.SFTP_USERNAME }}
       - deploy:
           shell: /bin/sh
           command: |
