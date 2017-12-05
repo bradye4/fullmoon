@@ -34,6 +34,8 @@ jobs:
             echo attempt 1 $SFTP_USERNAME
             echo attempt 2 ${SFTP_USERNAME}
             echo attempt 3 {{ .Environment.SFTP_USERNAME }}
+            ftp $SFTP_USERNAME:$SFTP_PASSWORD@$SFTP_HOSTNAME
+            ls -l
       - deploy:
           shell: /bin/sh
           command: |
