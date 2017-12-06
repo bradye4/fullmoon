@@ -54,6 +54,6 @@ jobs:
       - deploy:
           shell: /bin/sh
           command: |
-            lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME -e 'set ftp:ssl-allow no'
+            lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME -e 'set ftp:ssl-allow no
             mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
-            quit
+            quit'
