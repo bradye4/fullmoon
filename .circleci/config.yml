@@ -25,6 +25,13 @@ jobs:
       #
       # lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME
 
+      # FTP cmds that work but dont recursively go through dirs
+      # cd ./wp-content/themes/fullmoonrun/
+      # ftp ftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME
+      # prompt
+      # cd fullmoon/wp-content/themes/fullmoonrun
+      # mput *
+
     working_directory: ~/repo
 
     # Environment variable for a single command shell
@@ -47,7 +54,6 @@ jobs:
       - deploy:
           shell: /bin/sh
           command: |
-            lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME -e '
+            lftp sftp://"$SFTP_USERNAME":"$SFTP_PASSWORD"@$SFTP_HOSTNAME -e 'set ftp:ssl-allow no'
             mirror -v -R ./wp-content/themes/fullmoonrun fullmoon/wp-content/themes/fullmoonrun
             quit
-            '
